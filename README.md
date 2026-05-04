@@ -1,4 +1,4 @@
-&#x20;                                   **THREE TIER ARCHITECTURE SETUP**
+&#x20;                                              **THREE TIER ARCHITECTURE SETUP**
 
 
 
@@ -6,7 +6,9 @@ draw.io image
 
 
 
-**VPC SETUP:**
+&#x20;                                                          **VPC SETUP:**
+
+
 
 
 
@@ -98,4 +100,22 @@ NOTE: each route table is created for all public and private subnet
 
 
 **SECURITY GROUP:**
+
+
+
+web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic 
+
+
+
+app-tier-sg: For application tier inbound traffic is allowed from the web-tier-sg and type is all traffic
+
+
+
+db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
+
+
+
+&#x20;      
+
+&#x20;                                                    **INSTANCE SETUP**
 
