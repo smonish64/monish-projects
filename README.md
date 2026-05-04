@@ -115,6 +115,9 @@ NOTE: each route table is created for all public and private subnet
 
 * db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
 
+<img width="1908" height="269" alt="image" src="https://github.com/user-attachments/assets/5b7e08bd-46df-481a-9529-32ed08a408c4" />
+
+
 
 
 &#x20;
