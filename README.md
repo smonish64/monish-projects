@@ -1,2 +1,13 @@
-# threetier-application
-to deploy three tier application
+Three tier application deployment using console:
+draw.io image
+
+**VPC SETUP**
+VPC 
+PUBLIC SUBNETS: TWO PUBLIC SUBNETS FOR WEB-TIER
+PRIVATE-SUBNET: FOUR PRIVATE SUBNETS FOR APP AND DB TIER
+NAT GATEWAY
+INTERNET GATEWAY
+SECURITY GROUPS
+ROUTING TABLES
+
+
