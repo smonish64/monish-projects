@@ -1,5 +1,3 @@
-
-
 &#x20;                                              **THREE TIER ARCHITECTURE SETUP**
 
 
@@ -105,67 +103,77 @@ NOTE: each route table is created for all public and private subnet
 
 
 
-web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic
+* web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic
 
 
 
-app-tier-sg: For application tier inbound traffic is allowed from the web-tier-sg and type is all traffic
+* app-tier-sg: For application tier inbound traffic is allowed from the web-tier-sg and type is all traffic
 
 
 
-db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
+* db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
 
 
 
 &#x20;
 
-&#x20;                                                    **INSTANCE SETUP**
+&#x20;                                                     **INSTANCE SETUP**
 
 
 
-**web\_server\_1**
+* **web\_server\_1**
 
 &#x20;
 
-launch a instance with Microsoft windows server 2025 base AMI and ins attach pub-sub-1 subnet and web-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-1 and web-tier-sg to it
 
 
 
-**web\_server\_2**
+* **web\_server\_2**
 
 
 
-launch a instance with Microsoft windows server 2025 base AMI and attach pub-sub-2 subnet and web-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-2 subnet and web-tier-sg to it
 
 
 
-**app\_server\_1**
+* **app\_server\_1**
 
 
 
-launch a instance with Microsoft windows server 2025 base AMI and attach pri-sub-1 subnet and app-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-1 subnet and app-tier-sg to it
 
 
 
-**app\_server\_2**
+* **app\_server\_2**
 
 
 
-launch a instance with Microsoft windows server 2025 base AMI and attach pri-sub-2 subnet and app-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-2 subnet and app-tier-sg to it
 
 
 
-**db\_server\_1**
+* **db\_server\_1**
 
 
 
-launch a instance with Microsoft windows server 2025 base with SQL server 2025 standard AMI and attach pri-sub-3 subnet and db-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-3 subnet and db-tier-sg to it
 
 
 
-**db\_server\_2**
+* **db\_server\_2**
 
 
 
-launch a instance with Microsoft windows server 2025 base with SQL server 2025 standard AMI and attach pri-sub-4 subnet and db-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-4 subnet and db-tier-sg to it
+
+
+
+
+
+&#x20;                                                                  **OUTPUT**
+
+
+
+
 
