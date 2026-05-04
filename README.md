@@ -97,6 +97,8 @@ NAT gateway is created for the VPC and elastic IP is allocated for it.
 
 NOTE: each route table is created for all public and private subnet
 
+<img width="1875" height="556" alt="image" src="https://github.com/user-attachments/assets/a33c0b02-e654-4429-af70-0e677b0e1c71" />
+
 
 
 **SECURITY GROUP:**
