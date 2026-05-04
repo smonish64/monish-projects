@@ -62,3 +62,40 @@ A dedicated VPC is created for the architecture with CIDR range of 192.168.0.0/2
 
 
 * private subnet is created with CIDR range of 192.168.0.160/27 and named as pri-sub-4
+
+
+
+**INTERNET GATEWAY:**
+
+
+
+Internet gateway is created and attached to the VPC
+
+
+
+**NAT GATEWAY:**
+
+
+
+NAT gateway is created for the VPC and elastic IP is allocated for it.
+
+
+
+**ROUTE TABLE:**
+
+
+
+* public route table is created for target internet gateway and destination is 0.0.0.0/0
+
+
+
+* private route table is created for target NAT gateway and destination is 0.0.0.0/0
+
+
+
+NOTE: each route table is created for all public and private subnet
+
+
+
+**SECURITY GROUP:**
+
