@@ -1,121 +1,90 @@
-&#x20;                                              **THREE TIER ARCHITECTURE SETUP**
-
-
+                                                THREE TIER ARCHITECTURE SETUP 
 
 draw.io image
 
+                                                           VPC SETUP:
 
 
-&#x20;                                                          **VPC SETUP:**
+VPC
+subnets
+Internet gateway
+NAT gateway
+Route tables
+security group
 
 
-
-
-
-* VPC
-* subnets
-* Internet gateway
-* NAT gateway
-* Route tables
-* security group
-
-
-
-
-
-**VPC CREATION:**
-
-
+VPC CREATION:
 
 A dedicated VPC is created for the architecture with CIDR range of 192.168.0.0/24 and named as three-tier-VPC and total usable IP's are 254
 
+SUBNET CREATION:
 
+public subnet:
 
-**SUBNET CREATION:**
+public subnet is created with CIDR range of 192.168.0.0/27 and named as pub-sub-1
 
+public subnet is created with CIDR range of 192.168.0.32/27 and named as pub-sub-2
 
+private subnet:
 
-**public subnet:**
+private subnet is created with CIDR range of 192.168.0.64/27 and named as pri-sub-1
 
+private subnet is created with CIDR range of 192.168.0.96/27 and named as pri-sub-2
 
+private subnet is created with CIDR range of 192.168.0.128/27 and named as pri-sub-3
 
-* public subnet is created with CIDR range of 192.168.0.0/27 and named as pub-sub-1
+private subnet is created with CIDR range of 192.168.0.160/27 and named as pri-sub-4
 
-
-
-* public subnet is created with CIDR range of 192.168.0.32/27 and named as pub-sub-2
-
-
-
-**private subnet:**
-
-
-
-* private subnet is created with CIDR range of 192.168.0.64/27 and named as pri-sub-1
-
-
-
-* private subnet is created with CIDR range of 192.168.0.96/27 and named as pri-sub-2
-
-
-
-* private subnet is created with CIDR range of 192.168.0.128/27 and named as pri-sub-3
-
-
-
-* private subnet is created with CIDR range of 192.168.0.160/27 and named as pri-sub-4
-
-
-
-**INTERNET GATEWAY:**
-
-
+INTERNET GATEWAY:
 
 Internet gateway is created and attached to the VPC
 
-
-
-**NAT GATEWAY:**
-
-
+NAT GATEWAY:
 
 NAT gateway is created for the VPC and elastic IP is allocated for it.
 
+ROUTE TABLE:
 
+public route table is created for target internet gateway and destination is 0.0.0.0/0
 
-**ROUTE TABLE:**
-
-
-
-* public route table is created for target internet gateway and destination is 0.0.0.0/0
-
-
-
-* private route table is created for target NAT gateway and destination is 0.0.0.0/0
-
-
+private route table is created for target NAT gateway and destination is 0.0.0.0/0
 
 NOTE: each route table is created for all public and private subnet
 
+SECURITY GROUP:
 
-
-**SECURITY GROUP:**
-
-
-
-web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic 
-
-
+web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic
 
 app-tier-sg: For application tier inbound traffic is allowed from the web-tier-sg and type is all traffic
 
-
-
 db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
 
+ 
+                                                     INSTANCE SETUP
 
 
-&#x20;      
+web_server_1
+ 
+launch a instance with Microsoft windows server 2025 base AMI and ins attach pub-sub-1 subnet and web-tier-sg to it  
 
-&#x20;                                                    **INSTANCE SETUP**
+web_server_2
+
+launch a instance with Microsoft windows server 2025 base AMI and attach pub-sub-2 subnet and web-tier-sg to it
+
+app_server_1
+
+launch a instance with Microsoft windows server 2025 base AMI and attach pri-sub-1 subnet and app-tier-sg to it
+
+app_server_2
+
+launch a instance with Microsoft windows server 2025 base AMI and attach pri-sub-2 subnet and app-tier-sg to it
+
+db_server_1
+
+launch a instance with Microsoft windows server 2025 base with SQL server 2025 standard AMI and attach pri-sub-3 subnet and db-tier-sg to it
+
+db_server_2
+
+launch a instance with Microsoft windows server 2025 base with SQL server 2025 standard AMI and attach pri-sub-4 subnet and db-tier-sg to it
+
 
