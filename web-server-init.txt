@@ -1,0 +1,12 @@
+## install ngnix webserver
+
+sudo dnf install nginx -y
+
+##proxy routing to app 
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://192.168.0.140:5000;
+    }
+}
