@@ -1,3 +1,5 @@
+##Database creation
+
 CREATE DATABASE three_tier;
 
 USE three_tier;
