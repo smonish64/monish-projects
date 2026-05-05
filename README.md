@@ -39,11 +39,11 @@ A dedicated VPC is created for the architecture with CIDR range of 192.168.0.0/2
 
 
 
-* public subnet is created with CIDR range of 192.168.0.0/27 and named as pub-sub-1
+* public subnet is created with CIDR range of 192.168.0.0/28 and named as pub-sub-1
 
 
 
-* public subnet is created with CIDR range of 192.168.0.32/27 and named as pub-sub-2
+* public subnet is created with CIDR range of 192.168.0.16/28 and named as pub-sub-2
 
 
 
@@ -51,19 +51,19 @@ A dedicated VPC is created for the architecture with CIDR range of 192.168.0.0/2
 
 
 
-* private subnet is created with CIDR range of 192.168.0.64/27 and named as pri-sub-1
+* private subnet is created with CIDR range of 192.168.0.128/28 and named as pri-sub-1
 
 
 
-* private subnet is created with CIDR range of 192.168.0.96/27 and named as pri-sub-2
+* private subnet is created with CIDR range of 192.168.0.160/28 and named as pri-sub-2
 
 
 
-* private subnet is created with CIDR range of 192.168.0.128/27 and named as pri-sub-3
+* private subnet is created with CIDR range of 192.168.0.144/28 and named as pri-sub-3
 
 
 
-* private subnet is created with CIDR range of 192.168.0.160/27 and named as pri-sub-4
+* private subnet is created with CIDR range of 192.168.0.176/28 and named as pri-sub-4
 
 
 
@@ -71,7 +71,7 @@ A dedicated VPC is created for the architecture with CIDR range of 192.168.0.0/2
 
 
 
-Internet gateway is created and attached to the VPC
+Internet gateway is created and attached to the VPC and name it as IGW-three-tier
 
 
 
@@ -79,7 +79,11 @@ Internet gateway is created and attached to the VPC
 
 
 
-NAT gateway is created for the VPC and elastic IP is allocated for it.
+NAT gateway is created for the VPC and elastic IP is allocated for it and name it as nat-three-tier
+
+
+
+
 
 
 
@@ -95,9 +99,12 @@ NAT gateway is created for the VPC and elastic IP is allocated for it.
 
 
 
-NOTE: each route table is created for all public and private subnet
+NOTE: each route table is created for all private subnet individually
 
-<img width="1875" height="556" alt="image" src="https://github.com/user-attachments/assets/a33c0b02-e654-4429-af70-0e677b0e1c71" />
+
+
+&#x20;
+<img width="1898" height="580" alt="Screenshot 2026-05-05 130708" src="https://github.com/user-attachments/assets/01e9f7b1-82eb-489d-b85a-5a92c8d45fb8" />
 
 
 
@@ -105,18 +112,21 @@ NOTE: each route table is created for all public and private subnet
 
 
 
-* web-tier-sg: For web tier inbound traffic is allowed from all sources and type is all traffic
+* **web-sg:** For web tier inbound traffic is allowed from alb-sg and type is all HTTP and add my IP as source for all traffic 
 
 
 
-* app-tier-sg: For application tier inbound traffic is allowed from the web-tier-sg and type is all traffic
+* **app-sg:** For application tier inbound traffic is allowed from the web-sg and type is all HTTP and add my IP as source for all traffic
 
 
 
-* db-tier-sg: For database tier inbound traffic is allowed from app-tier-sg and type is all traffic
+* **db-sg:** For database tier inbound traffic is allowed from app-sg and type is all HTTP and add my IP as source for all traffic
 
-<img width="1908" height="269" alt="image" src="https://github.com/user-attachments/assets/5b7e08bd-46df-481a-9529-32ed08a408c4" />
 
+
+* **alb-sg:** For alb all traffic is allowed in inbound from all sources
+
+<img width="1906" height="308" alt="Screenshot 2026-05-05 130806" src="https://github.com/user-attachments/assets/e62559d0-dd3d-4c8b-9c52-40496790468e" />
 
 
 
@@ -130,7 +140,7 @@ NOTE: each route table is created for all public and private subnet
 
 &#x20;
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-1 and web-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-1 and web-sg to it
 
 
 
@@ -138,7 +148,7 @@ launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.mi
 
 
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-2 subnet and web-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pub-sub-2 subnet and web-sg to it
 
 
 
@@ -146,7 +156,7 @@ launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.mi
 
 
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-1 subnet and app-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-1 subnet and app-sg to it
 
 
 
@@ -154,7 +164,7 @@ launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.mi
 
 
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-2 subnet and app-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-2 subnet and app-sg to it
 
 
 
@@ -162,7 +172,7 @@ launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.mi
 
 
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-3 subnet and db-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-3 subnet and db-sg to it
 
 
 
@@ -170,15 +180,42 @@ launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.mi
 
 
 
-launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-4 subnet and db-tier-sg to it
+launch a instance with Amazon Linux 2023 kernel-6.1 AMI with instance type t3.micro and attach pri-sub-4 subnet and db-sg to it
+
+
+<img width="1571" height="432" alt="Screenshot 2026-05-05 125900" src="https://github.com/user-attachments/assets/1ab7502a-a37d-4352-ad42-764d9cce14e8" />
 
 
 
 
 
-&#x20;                                                                  **OUTPUT**
+&#x20;                                                      **APPLICATION LOAD BALANCER**
 
 
 
+
+
+* create a application load balancer facing internet and add listener as http and port 80
+
+
+
+* Target groups are web\_server\_1 and web\_server\_2 and attach them to the load balancer and check the health of the target groups.
+
+
+
+
+<img width="1871" height="535" alt="Screenshot 2026-05-05 130609" src="https://github.com/user-attachments/assets/17a5e989-1fea-4ff5-8102-cefba94eb828" />
+
+
+
+
+
+&#x20;                                               **OUTPUT FOR THE THREE TIER APPLICATION**
+
+
+
+
+
+<img width="1899" height="847" alt="Screenshot 2026-05-05 132951" src="https://github.com/user-attachments/assets/7422a087-5163-464b-acb6-398ee9b002e8" />
 
 
