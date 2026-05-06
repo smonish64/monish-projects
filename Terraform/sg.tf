@@ -20,8 +20,17 @@ resource "aws_vpc_security_group_egress_rule" "websgout" {
   #define inbound rules
 resource "aws_vpc_security_group_ingress_rule" "websgin" {
   security_group_id = aws_security_group.websg.id
-  cidr_ipv4 = "0.0.0.0/0"
-    ip_protocol = "-1"
+  referenced_security_group_id = aws_security_group.albsg.id  // security group reference for source security group
+  from_port = 80
+  to_port = 80
+    ip_protocol = "tcp"
+  }
+  resource "aws_vpc_security_group_ingress_rule" "websgin2" {
+  security_group_id = aws_security_group.websg.id
+  referenced_security_group_id = aws_security_group.albsg.id  // security group reference for source security group
+  from_port = 22
+  to_port = 22
+    ip_protocol = "tcp"
   }
 
 # for app tier and db can be updated here
@@ -34,16 +43,11 @@ resource "aws_security_group" "appsg" {
 }
 resource "aws_vpc_security_group_ingress_rule" "appsgin1" {
   security_group_id = aws_security_group.appsg.id
-  cidr_ipv4 = "106.51.1.25/32" 
-
-   ip_protocol = "-1"
-}
-resource "aws_vpc_security_group_ingress_rule" "appsgin2" {
-  security_group_id = aws_security_group.appsg.id
-  cidr_ipv4 = "0.0.0.0/0"
-  ip_protocol = "icmp"
-  from_port = -1
-  to_port = -1
+  referenced_security_group_id = aws_security_group.websg.id  // security group reference for source security group
+  from_port = 80
+  to_port = 80
+  
+  ip_protocol = "tcp"
 }
 resource "aws_vpc_security_group_egress_rule" "appsgout" {
     security_group_id = aws_security_group.appsg.id
@@ -60,18 +64,35 @@ resource "aws_security_group" "dbsg" {
 }
 resource "aws_vpc_security_group_ingress_rule" "dbsgin1" {
   security_group_id = aws_security_group.dbsg.id
-  cidr_ipv4 = "106.51.1.25/32"
-    ip_protocol = "-1"
-}
-resource "aws_vpc_security_group_ingress_rule" "dbsgin2" {
-  security_group_id = aws_security_group.dbsg.id
-  cidr_ipv4 = "0.0.0.0/0"
-  ip_protocol = "icmp"
-  from_port = -1
-  to_port = -1
+  referenced_security_group_id = aws_security_group.appsg.id
+  from_port = 80
+  to_port = 80
+  ip_protocol = "tcp"
 }
 resource "aws_vpc_security_group_egress_rule" "dbsgout" {
     security_group_id = aws_security_group.dbsg.id
       ip_protocol = -1
+      
     cidr_ipv4 = "0.0.0.0/0"  
+}
+
+resource "aws_security_group" "albsg" {
+    vpc_id = aws_vpc.vpc.id
+    description = "for alb"
+  tags = {
+    Name="alb_sg"
+  }
+  
+}
+resource "aws_vpc_security_group_egress_rule" "alboutbound" {
+    security_group_id = aws_security_group.albsg.id
+      ip_protocol = -1
+    cidr_ipv4 = "0.0.0.0/0"
+  
+}
+resource "aws_vpc_security_group_ingress_rule" "albingress" {
+  security_group_id = aws_security_group.albsg.id
+  from_port = 0
+  to_port = 0
+  ip_protocol = "-1"
 }
