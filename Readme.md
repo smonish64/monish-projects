@@ -8,7 +8,7 @@ List of files:
 * db config file.txt
 * web server config.txt
 
-**2.TERRAFORM CI/CD IMPLEMENTATION**
+**2.TERRAFORM IMPLEMENTATION**
 
 List of files:
 * README.md
@@ -16,3 +16,4 @@ List of files:
 * sg.tf
 * vpc.tf
 * output.tf
+* aalb.tf
