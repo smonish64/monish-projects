@@ -11,8 +11,8 @@ List of files:
 **2.TERRAFORM CI/CD IMPLEMENTATION**
 
 List of files:
-*README.md
-*ec2.tf
-*sg.tf
-*vpc.tf
-*output.tf
+* README.md
+* ec2.tf
+* sg.tf
+* vpc.tf
+* output.tf
