@@ -21,6 +21,7 @@
 * sg.tf
 * vpc.tf
 * output.tf
+* alb.tf
 
 
 
@@ -40,6 +41,7 @@ To initialize terraform operation use command
           
     terraform init
 
+<img width="953" height="457" alt="Screenshot 2026-05-06 121352" src="https://github.com/user-attachments/assets/823cea77-4384-4158-9570-b0fd2b5a98c5" />
 
 
 To check the code is valid use
@@ -62,6 +64,18 @@ to apply it in the
 
 **What code does**
 
-* Separarate VPC is created in the name 
+* Separate VPC is created in the name terraform-vpc
+* creates 2 public and 2 private subnet
+* one Internet gateway
+* one NAT gateway
+* public route table for public subnets and private route table for private subnets
+* creates 6 instances 2 for web server, 2 for app server, 2 for database.
+* Security group is created for each tier and separate for ALB
+* ALB has a target group of two web instances
+
+
+
+  
+  
 
 
