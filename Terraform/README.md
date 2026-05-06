@@ -69,10 +69,14 @@ to apply it in the
 * one Internet gateway
 * one NAT gateway
 * public route table for public subnets and private route table for private subnets
-* creates 6 instances 2 for web server, 2 for app server, 2 for database.
 * Security group is created for each tier and separate for ALB
-* ALB has a target group of two web instances
 
+  <img width="1847" height="471" alt="image" src="https://github.com/user-attachments/assets/1d13180f-ca85-4b07-93b1-3bd01ae4e4c5" />
+  
+* creates 6 instances 2 for web server, 2 for app server, 2 for database.
+
+<img width="1886" height="296" alt="image" src="https://github.com/user-attachments/assets/a2a34020-1f54-4271-9c67-377affe3ea54" />
+* ALB has a target group of two web instances
 
 
   
