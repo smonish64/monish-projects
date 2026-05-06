@@ -26,11 +26,46 @@ resource "aws_ebs_volume" "webvol1" {
   }
 }
 #attachment of additional volume
-resource "aws_volume_attachment" "web_attch" {
+resource "aws_volume_attachment" "web_attch1" {
   device_name = "/dev/sdh"
   volume_id   = aws_ebs_volume.webvol1.id
   instance_id = aws_instance.webins1.id
 }
+
+
+# web server deployment(web2)
+resource "aws_instance" "webins2" {
+  ami                         = "ami-02dfbd4ff395f2a1b"
+  instance_type               = "t3.micro"
+  subnet_id                   = aws_subnet.public_02.id
+  associate_public_ip_address = true
+  availability_zone           = "us-east-1b"
+  key_name                    = "secondary account"
+  vpc_security_group_ids = [aws_security_group.websg.id] //security groups must be defined within []
+  tags = {
+    Name = "web-server2"
+  }
+}
+# by default vpc creates a eni and then default ebs
+# creation of additional volume
+resource "aws_ebs_volume" "webvol2" {
+  availability_zone = "us-east-1b"
+  size              = 40
+  tags = {
+    Name = "sec_disk_web2"
+  }
+}
+#attachment of additional volume
+resource "aws_volume_attachment" "web_attch2" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.webvol2.id
+  instance_id = aws_instance.webins2.id
+}
+
+
+
+
+
 
 ### app server  1
 
@@ -62,6 +97,36 @@ resource "aws_volume_attachment" "app_attach1" {
 
 
 
+### app server  2
+
+resource "aws_instance" "appins2" {
+  ami               = "ami-02dfbd4ff395f2a1b"
+  instance_type     = "t3.micro"
+  availability_zone = "us-east-1b"
+  subnet_id         = aws_subnet.private_03.id
+  key_name          = "secondary account"
+  vpc_security_group_ids = [aws_security_group.appsg.id]
+  tags = {
+    Name = "app-server2"
+  }
+}
+#app server additional disk
+resource "aws_ebs_volume" "appvol2" {
+  availability_zone = "us-east-1b"
+  size              = 30
+  tags = {
+    Name = "sec_disk_app2"
+  }
+}
+#app server disk attachment
+resource "aws_volume_attachment" "app_attach2" {
+  device_name = "/dev/sdk"
+  instance_id = aws_instance.appins2.id
+  volume_id   = aws_ebs_volume.appvol2.id
+}
+
+
+
 
 # DB server  1
 
@@ -89,5 +154,34 @@ resource "aws_volume_attachment" "db_attach1" {
   device_name = "/dev/sde"
   volume_id   = aws_ebs_volume.dbvol1.id
   instance_id = aws_instance.dbins1.id
+}
+
+
+# DB server  2
+
+resource "aws_instance" "dbins2" {
+  ami               = "ami-02dfbd4ff395f2a1b"
+  subnet_id         = aws_subnet.private_04.id
+  instance_type     = "t3.micro"
+  availability_zone = "us-east-1b"
+  key_name          = "secondary account"
+  vpc_security_group_ids = [aws_security_group.dbsg.id]
+  tags = {
+    Name = "db-server2"
+  }
+}
+#db server additional disk
+resource "aws_ebs_volume" "dbvol2" {
+  availability_zone = "us-east-1b"
+  size              = 30
+  tags = {
+    Name = "sec_disk_db2"
+  }
+}
+# db server disk attachment
+resource "aws_volume_attachment" "db_attach2" {
+  device_name = "/dev/sde"
+  volume_id   = aws_ebs_volume.dbvol2.id
+  instance_id = aws_instance.dbins2.id
 }
 
