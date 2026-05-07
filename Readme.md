@@ -22,6 +22,7 @@ List of files:
 **3.ECS DEPLOYMENT**
 
 List of files:
+
 -->*APP*
 * Dockerfile
 * README.md
