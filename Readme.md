@@ -19,7 +19,7 @@ List of files:
 * output.tf
 * aalb.tf
 
-**ECS DEPLOYMENT**
+**3.ECS DEPLOYMENT**
 
 List of files:
 -->*APP*
