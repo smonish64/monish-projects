@@ -40,3 +40,16 @@ List of files:
 * README.md
 * payment.py
 * requirements.txt
+
+**4.CI/CD PIPELINE**
+List of files:
+--> *.github/workflows*
+* pipeline.yml
+  
+--> *pipeline*
+* ec2.tf
+* vpc.tf
+* sg.tf
+* s3.tf
+
+  
