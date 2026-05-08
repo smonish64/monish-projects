@@ -7,11 +7,11 @@ on:
     branches:
       - main
     paths:
-      - 'Terraform/**'
+      - 'pipeline/**'
 
   pull_request:
     paths:
-      - 'Terraform/**'
+      - 'pipeline/**'
 
 permissions:
   contents: read
@@ -28,7 +28,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: Terraform
+        working-directory: pipeline
 
     steps:
       - name: Checkout
