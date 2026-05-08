@@ -15,8 +15,8 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  TF_VAR_key_name: ${{ secrets.EC2_KEY_NAME }}     # ← your "secondary account" key
-  TF_VAR_ami_id: ${{ secrets.EC2_AMI_ID }}         # ← ami-00c5d42fcb71673fd
+  #TF_VAR_key_name: ${{ secrets.EC2_KEY_NAME }}     # ← your "secondary account" key
+ # TF_VAR_ami_id: ${{ secrets.EC2_AMI_ID }}         # ← ami-00c5d42fcb71673fd
 
 jobs:
   terraform:
