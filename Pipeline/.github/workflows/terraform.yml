@@ -3,12 +3,12 @@ name: Terraform - AWS Infrastructure
 on:
   push:
     paths:
-      - 'Pipeline/**'
+      - 'Terraform/**'
     branches:
       - main
   pull_request:
     paths:
-      - 'Pipeline/**'
+      - 'Terraform/**'
 
 permissions:
   contents: read
