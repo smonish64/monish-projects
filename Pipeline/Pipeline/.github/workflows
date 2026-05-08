@@ -27,7 +27,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+        working-directory: Terraform
 
     steps:
       - name: Checkout
@@ -58,6 +58,4 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false tfplan
-       - name: Terraform Output
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform output
+      
