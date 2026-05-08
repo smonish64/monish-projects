@@ -43,6 +43,7 @@ List of files:
 
 **4.CI/CD PIPELINE**
 List of files:
+
 --> *.github/workflows*
 * pipeline.yml
   
@@ -51,5 +52,6 @@ List of files:
 * vpc.tf
 * sg.tf
 * s3.tf
+* README.md
 
   
