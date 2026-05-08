@@ -2,8 +2,6 @@ name: Terraform - AWS Infrastructure pipeline
 
 on:
   workflow_dispatch:
-  
-on:
   push:
     paths:
       - 'Terraform/**'
